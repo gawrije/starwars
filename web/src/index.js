@@ -6,15 +6,17 @@ import UserRegistration from './pages/signup/user-registration/UserRegistration'
 import { Header } from './shared/header/Header';
 import { Footer } from './shared/footer/Footer';
 import styles from './styles/styles.scss';
+import Films from './pages/films/Films';
 
 const Main = props => <BrowserRouter>
     <>
             <div className="mainContainer">
-            <Header/>
-            <div className="bodyContainert">
-                <Route path="/" exact component={UserRegistration}/>
-            </div>
-            <Footer/>
+                <Header/>
+                <div className="bodyContainer">
+                    <Route path="/" exact component={UserRegistration}/>
+                    <Route path="/films" exact component={Films}/>
+                </div>
+                <Footer/>
             </div>
     </>
 </BrowserRouter>
