@@ -6,20 +6,33 @@ import UserRegistration from './pages/signup/user-registration/UserRegistration'
 import { Header } from './shared/header/Header';
 import { Footer } from './shared/footer/Footer';
 import styles from './styles/styles.scss';
-import Films from './pages/films/Films';
+import FilmList from './pages/films/FilmList';
 
-const Main = props => <BrowserRouter>
-    <>
+import { ApolloClient } from 'apollo-client';
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { RestLink } from 'apollo-link-rest';
+import { ApolloProvider } from 'react-apollo'
+
+const restLink = new RestLink({ uri: 'https://swapi.co/api/'});
+const client = new ApolloClient({
+    link: restLink,
+    cache: new InMemoryCache(),
+    responseTransformer: async response => response.json()
+});
+
+const Main = props =>
+    <BrowserRouter>
+        <ApolloProvider client={client}>
             <div className="mainContainer">
-                <Header/>
+                <Header />
                 <div className="bodyContainer">
-                    <Route path="/" exact component={UserRegistration}/>
-                    <Route path="/films" exact component={Films}/>
+                    <Route path="/" exact component={UserRegistration} />
+                    <Route path="/films" exact component={FilmList} />
                 </div>
-                <Footer/>
+                <Footer />
             </div>
-    </>
-</BrowserRouter>
+        </ApolloProvider>
+    </BrowserRouter>
 
 ReactDOM.render(<Main />, document.getElementById('root'));
 
