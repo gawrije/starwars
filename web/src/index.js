@@ -5,12 +5,17 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import UserRegistration from './pages/signup/user-registration/UserRegistration';
 import { Header } from './shared/header/Header';
 import { Footer } from './shared/footer/Footer';
+import styles from './styles/styles.scss';
 
 const Main = props => <BrowserRouter>
     <>
-        <Header/>
-        <Route path="/" exact component={UserRegistration}/>
-        <Footer/>
+            <div className="mainContainer">
+            <Header/>
+            <div className="bodyContainert">
+                <Route path="/" exact component={UserRegistration}/>
+            </div>
+            <Footer/>
+            </div>
     </>
 </BrowserRouter>
 

@@ -2,5 +2,5 @@ import React from 'react'
 import styles from './Footer.module.scss';
 
 export const Footer = () => (
-    <div className={styles.footer}>This is the footer</div>
+    <div className={styles.footerContainer}>Copyright ©2019 Gawri edussuriya, Melbourne</div>
 );

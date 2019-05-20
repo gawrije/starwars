@@ -1,3 +1,16 @@
-.header{
-    border: 1px solid blue;
+.headerContainer {
+    height: 80px;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    background-image:  url('../../assets/images/sw_logo.png');
+    max-width: 350px;
+    width: 35%;
+    height: 30px;
+    background-size: contain;
+    background-repeat: no-repeat;
 }

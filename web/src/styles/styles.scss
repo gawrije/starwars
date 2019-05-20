@@ -1,0 +1,10 @@
+.mainContainer {
+    height: 99vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.bodyContainer {
+    max-width: 960px;
+    margin: 0 auto;
+}
