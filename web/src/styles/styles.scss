@@ -11,7 +11,8 @@
 }
 
 .bodyContainer {
-    max-width: 960px;
-    margin: 0 auto;
-    width: 80%;
+    @include tablet {
+        margin: 0 auto;
+        width: 80%;
+    }
 }

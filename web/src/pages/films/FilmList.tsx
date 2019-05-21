@@ -1,24 +1,24 @@
 import React from 'react';
 import { Query } from "react-apollo";
-import gql from 'graphql-tag';
+import { QUERY_FILMS } from '../../classes/query';
+import HeaderContainer from '../../shared/header-container/HeaderContainer';
+import styles from './FilmList.module.scss';
 
-const QUERY = gql`
-    query Films {
-        films @rest(type: "FilmsPayload", path: "films") {
-            results @type(name: "Film") {
-                title
-            }
-        }
-    }
-`;
+const loadFilms = (films: IFilmPayload) => {
+    return films.results.map((film: IFilm) => {
+        return <div key={film.created} className={styles.film}>{film.title}</div>;
+    })
+}
 
 export default class FilmList extends React.Component {
     render() {
-        return <Query query={QUERY}>
-            {({data}: {data: any}) => <div>
-                {console.log(data)}
-                test
-            </div>}
-        </Query>;
+        return <>
+            <HeaderContainer title="Films"></HeaderContainer>
+            <Query query={QUERY_FILMS}>
+                {({ data }: { data: any }) => <div className={styles.filmsContainer}>
+                    {data.films ? loadFilms(data.films) : 'Loading...'}
+                </div>}
+            </Query>
+        </>;
     }
 }

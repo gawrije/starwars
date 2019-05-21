@@ -1,0 +1,8 @@
+@import '../../styles/shared';
+
+.headerContainer {
+    h1 {
+        color: $teal;
+        border-bottom: 1px dotted $teal;
+    }
+}

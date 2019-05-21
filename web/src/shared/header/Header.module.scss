@@ -23,12 +23,20 @@
     .menuItems {
         display: flex;
         @include tablet {
-            max-width: 70%; 
+            max-width: 80%; 
             margin: 0 auto;
         }
 
         div {
-            color: white;
+            a{
+                color: white;
+                text-decoration: none;
+                &:hover {
+                    cursor: pointer;
+                    color: black;
+                }
+            }
+
             font-size: 14px;
             flex: 1;
             height: 30px;
@@ -49,12 +57,10 @@
                     border-left: 1px dotted white;
                 }
             }
-           
-
-            &:hover {
-                cursor: pointer;
-                color: black;
-            }
         }
+    }
+
+    .breadcrumb {
+        
     }
 }

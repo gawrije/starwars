@@ -7,6 +7,7 @@ import { Header } from './shared/header/Header';
 import { Footer } from './shared/footer/Footer';
 import styles from './styles/styles.scss';
 import FilmList from './pages/films/FilmList';
+import ActorList from './pages/actors/ActorList';
 
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory'
@@ -28,6 +29,7 @@ const Main = props =>
                 <div className="bodyContainer">
                     <Route path="/" exact component={UserRegistration} />
                     <Route path="/films" exact component={FilmList} />
+                    <Route path="/people" exact component={ActorList} />
                 </div>
                 <Footer />
             </div>

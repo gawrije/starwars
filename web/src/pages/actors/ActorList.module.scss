@@ -1,0 +1,38 @@
+
+@import '../../styles/shared';
+
+.actorsContainer {
+    display: flex;
+    flex-direction: column;
+
+    @include tablet {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .actor {
+        width: 100%;
+        height: 30px;
+        padding: 5px 0;
+        margin-bottom: 10px;
+        background-color: #eff7f7;
+        display: flex;
+        align-items: center;
+        color: teal;
+
+        @include tablet {
+            width: 200px;
+            height: 200px;
+            align-items: normal;
+            margin-left: 10px;
+
+        }
+    
+
+        &:hover {
+            cursor: pointer;
+            color: $primary-black;
+        }
+    }
+   
+}
