@@ -6,7 +6,7 @@ import styles from './ActorList.module.scss';
 
 const loadActors = (actors: IActorsPayload) => {
     return actors.results.map((actor: IActor) => {
-        return <div key={actor.birth_year} className={styles.actor}>{actor.name}</div>;
+        return <div key={actor.url} className={styles.actor}>{actor.name}</div>;
     })
 }
 

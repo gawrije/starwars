@@ -20,4 +20,5 @@ interface IActor {
     height: string;
     birth_year: string;
     gender: string;
+    url: string;
 }
