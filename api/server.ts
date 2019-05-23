@@ -1,8 +1,11 @@
-var express = require('express');
-var graphqlSchema = require('./src/schema.ts');
+var  express  = require('express');
+import  { graphqlEndpoint }  from './src/schema';
 var app = express();
 
-app.use('/graphql', graphqlSchema.graphqlEndpoint());
+var cors = require('cors')
+app.use(cors())
+
+app.use('/graphql', graphqlEndpoint());
 
 app.use('/', function(req, res){
     res.send("Welcome to star war API");

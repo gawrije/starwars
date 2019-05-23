@@ -1,8 +1,7 @@
-
-
 var express_graphql = require('express-graphql');
-var { buildSchema } = require('graphql');
-var request = require('request');
+import { buildSchema } from 'graphql';
+
+import fetch from 'node-fetch';
 
 var schema = buildSchema(`
     type Query {
@@ -18,61 +17,41 @@ var schema = buildSchema(`
     }
 `);
 
-var getActor = (args) => {
+var getActor = async (args) => {
     var id = args.id;
 
-    return {
-        id: '12',
-        name: 'gawri',
-        height: '322',
-        birth_year: '1984',
-        gender: 'male'
+    try {
+        const response = await fetch(`https://swapi.co/api/people/${id}`);
+        const json = await response.json();
+        console.log(json);
+
+        return json;
+
+    } catch (error) {
+        console.log(error);
     }
+
 }
 
 
+var getActors = async () => {
+    try {
+        const response = await fetch('https://swapi.co/api/people');
+        const json = await response.json();
 
-var getActors = () => {
+        return json.results.map(actor =>
+            ({
+                id: actor.url,
+                name: actor.name,
+                height: actor.height,
+                birth_year: actor.birth_year,
+                gender: actor.gender
+            })
+        );
 
-    /*return [{
-        id: '12',
-        name: 'gawri12',
-        height: '322',
-        birth_year: '1984',
-        gender: 'male'
-    },{
-        id: '13',
-        name: 'aaaaa',
-        height: '322',
-        birth_year: '1984',
-        gender: 'male'
-    }]*/
-
-    
-   
-   request('https://swapi.co/api/people', function(error, response, body) {
-
-        let array = [];
-
-        if (!error && response.statusCode == 200) {
-           // console.log(body) ;
-           var swapiResult = JSON.parse(body).results;
-           swapiResult.map(actor => { 
-                return array.push({
-                    id: actor.url,
-                    name: actor.name,
-                    height: actor.height,
-                    birth_year: actor.birth_year,
-                    gender: actor.gender
-                });
-           }); 
-        }
-
-        console.log(array);
-        return array;
-    });
-
-    console.log(test);
+    } catch (error) {
+        console.log(error);
+    }
 }
 
 var root = {
@@ -80,7 +59,7 @@ var root = {
     actors: getActors
 };
 
-exports.graphqlEndpoint = () => express_graphql({
+export const graphqlEndpoint = () => express_graphql({
     schema: schema,
     rootValue: root,
     graphiql: true,

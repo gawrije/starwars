@@ -9,17 +9,24 @@ import styles from './styles/styles.scss';
 import FilmList from './pages/films/FilmList';
 import ActorList from './pages/actors/ActorList';
 
-import { ApolloClient } from 'apollo-client';
+//import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { RestLink } from 'apollo-link-rest';
+//import { RestLink } from 'apollo-link-rest';
 import { ApolloProvider } from 'react-apollo'
 
-const restLink = new RestLink({ uri: 'https://swapi.co/api/'});
+import ApolloClient from "apollo-boost";
+
+const client = new ApolloClient({
+  uri: "http://localhost:9000/graphql"
+});
+
+/*
+const restLink = new RestLink({ uri: 'http://localhost:9000/graphql'});
 const client = new ApolloClient({
     link: restLink,
     cache: new InMemoryCache(),
     responseTransformer: async response => response.json()
-});
+});*/
 
 const Main = props =>
     <BrowserRouter>

@@ -12,7 +12,7 @@ interface IFilm {
 
 
 interface IActorsPayload {
-    results: IActor[];
+    actors: IActor[];
 }
 
 interface IActor {
@@ -20,5 +20,5 @@ interface IActor {
     height: string;
     birth_year: string;
     gender: string;
-    url: string;
+    id: string;
 }
