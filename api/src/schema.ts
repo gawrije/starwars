@@ -3,7 +3,7 @@ import { buildSchema } from 'graphql';
 
 import fetch from 'node-fetch';
 
-var schema = buildSchema(`
+const schema = buildSchema(`
     type Query {
         actor(id: String): Actor
         actors: [Actor]
@@ -17,7 +17,7 @@ var schema = buildSchema(`
     }
 `);
 
-var getActor = async (args) => {
+const getActor = async (args: any) => {
     var id = args.id;
 
     try {
@@ -33,11 +33,23 @@ var getActor = async (args) => {
 
 }
 
+interface RequestPayload {
+    results: Actor[]
+}
 
-var getActors = async () => {
+interface Actor {
+    url: string,
+    name: string,
+    height: string,
+    birth_year: string,
+    gender: string
+}
+
+
+const getActors = async () => {
     try {
         const response = await fetch('https://swapi.co/api/people');
-        const json = await response.json();
+        const json = await response.json() as RequestPayload;
 
         return json.results.map(actor =>
             ({
