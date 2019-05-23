@@ -1,27 +1,11 @@
 var express = require('express');
-var express_graphql = require('express-graphql');
-var { buildSchema } = require('graphql');
-
+var graphqlSchema = require('./src/schema.ts');
 var app = express();
 
+app.use('/graphql', graphqlSchema.graphqlEndpoint());
 
-var schema = buildSchema(`
-    type Query {
-        message: String
-    }
-`);
-
-var root = {
-    message: () => {
-        return 'hello world123';
-    }
-};
-
-app.use('/graphql', express_graphql({
-    schema: schema,
-    rootValue: root,
-    graphiql: true,
-}));
-
+app.use('/', function(req, res){
+    res.send("Welcome to star war API");
+});
 
 app.listen(9000, () => console.log("GraphQL server running on localhost:9000/grapql") );
