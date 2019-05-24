@@ -10,6 +10,7 @@ const schema = buildSchema(`
         actors: [Actor]
         film(id: String): Film
         films: [Film]
+        filmsByActorId(id: String): [Film]
     },
     type Actor {
         id: String
@@ -34,9 +35,18 @@ const getActor = async (args: any) => {
 
     try {
         const response = await fetch(`https://swapi.co/api/people/${id}`);
-        const json = await response.json();
+        const actor = await response.json() as IActor;
 
-        return json;
+        console.log(id);
+
+        return {
+            id: actor.url,
+            name: actor.name,
+            height: actor.height,
+            birth_year: actor.birth_year,
+            gender: actor.gender,
+            films: getFilmsByActorId(actor.films)
+        }
 
     } catch (error) {
         console.log(error);
@@ -58,6 +68,25 @@ const getFilm = async (args: any) => {
     }
 
 }
+
+
+/*const getFilmByUrl = async (data: any) => {
+    var id = data.id;
+    console.log(id);
+
+    try {
+        const response = await fetch(`${id}`);
+        console.log(response);
+        const json = await response.json() as IFilm;
+
+        
+        return json;
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}*/
 
 const getActors = async () => {
     try {
@@ -111,11 +140,22 @@ const getFilmsByActorId = (films: any[]) => {
     return null;
 }
 
+/*const getFilmsByActorId1 = async (args: any) => {
+
+    const actor = await getActor(args);
+
+    return actor.films.map( film => {
+        getFilmByUrl(film)
+    });
+   
+}*/
+
 var root = {
     actor: getActor,
     actors: getActors,
     film: getFilm,
-    films: getFilms
+    films: getFilms,
+    //filmsByActorId: getFilmsByActorId1
 };
 
 export const graphqlEndpoint = () => express_graphql({

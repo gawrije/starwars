@@ -1,5 +1,6 @@
 import React from 'react';
 import { Query } from "react-apollo";
+import  { Link } from 'react-router-dom';
 import { QUERY_ACTORS } from '../../classes/query';
 import HeaderContainer from '../../shared/header-container/HeaderContainer';
 import styles from './ActorList.module.scss';
@@ -7,7 +8,7 @@ import styles from './ActorList.module.scss';
 const loadActors = (actors: IActor[]) => {
     return actors.map((actor: IActor) => {
         return <div key={actor.id} className={styles.actor}>
-            {actor.name}
+             <Link to={'/actor/films/'}>{actor.name}</Link>
         </div>;
     })
 }
