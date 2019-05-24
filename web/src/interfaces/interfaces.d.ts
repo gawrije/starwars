@@ -22,4 +22,5 @@ interface IActor {
     birth_year: string;
     gender: string;
     id: string;
+    films: IFilm[];
 }

@@ -17,6 +17,7 @@ const schema = buildSchema(`
         height: String
         birth_year: String
         gender: String
+        films: [Film]
     },
     type Film {
         id: String
@@ -63,13 +64,15 @@ const getActors = async () => {
         const response = await fetch('https://swapi.co/api/people');
         const json = await response.json() as IActorsPayload;
 
+       // console.log(json);
         return json.results.map(actor =>
             ({
                 id: actor.url,
                 name: actor.name,
                 height: actor.height,
                 birth_year: actor.birth_year,
-                gender: actor.gender
+                gender: actor.gender,
+                films: getFilmsByActorId(actor.films)
             })
         );
 
@@ -97,6 +100,15 @@ const getFilms = async () => {
     } catch (error) {
         console.log(error);
     }
+}
+
+
+const getFilmsByActorId = (films: any[]) => {
+
+    if (films) {
+      return films.map(s => ({id: s}));
+    }
+    return null;
 }
 
 var root = {

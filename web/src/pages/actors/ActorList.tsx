@@ -6,7 +6,9 @@ import styles from './ActorList.module.scss';
 
 const loadActors = (actors: IActor[]) => {
     return actors.map((actor: IActor) => {
-        return <div key={actor.id} className={styles.actor}>{actor.name}</div>;
+        return <div key={actor.id} className={styles.actor}>
+            {actor.name}
+        </div>;
     })
 }
 

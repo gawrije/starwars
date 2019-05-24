@@ -1,5 +1,4 @@
-//import gql from 'graphql-tag';
-import { gql } from "apollo-boost";
+import { gql } from 'apollo-boost';
 
 export const QUERY_FILMS = gql`
     query Films {
@@ -20,6 +19,9 @@ export const QUERY_ACTORS = gql`
         actors {
             name
             id
+            films {
+                id
+            }
         }
     }
 `;
