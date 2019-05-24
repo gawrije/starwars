@@ -1,5 +1,6 @@
 var express_graphql = require('express-graphql');
 import { buildSchema } from 'graphql';
+import {IActorsPayload, IActor, IFilmsPayload,IFilm} from './interface';
 
 import fetch from 'node-fetch';
 
@@ -47,7 +48,7 @@ const getFilm = async (args: any) => {
 
     try {
         const response = await fetch(`https://swapi.co/api/films/${id}`);
-        const json = await response.json() as Film;
+        const json = await response.json() as IFilm;
 
         return json;
 
@@ -60,7 +61,7 @@ const getFilm = async (args: any) => {
 const getActors = async () => {
     try {
         const response = await fetch('https://swapi.co/api/people');
-        const json = await response.json() as ActorsRequestPayload;
+        const json = await response.json() as IActorsPayload;
 
         return json.results.map(actor =>
             ({
@@ -80,7 +81,7 @@ const getActors = async () => {
 const getFilms = async () => {
     try {
         const response = await fetch('https://swapi.co/api/films');
-        const json = await response.json() as FilmsRequestPayload;
+        const json = await response.json() as IFilmsPayload;
 
         return json.results.map(film =>
             ({

@@ -1,9 +1,9 @@
 
-interface ActorsRequestPayload {
-    results: Actor[]
+export interface IActorsPayload {
+    results: IActor[]
 }
 
-interface Actor {
+export interface IActor {
     url: string,
     name: string,
     height: string,
@@ -11,11 +11,11 @@ interface Actor {
     gender: string
 }
 
-interface FilmsRequestPayload {
-    results: Film[]
+export interface IFilmsPayload {
+    results: IFilm[]
 }
 
-interface Film {
+export interface IFilm {
     url: string,
     title: string,
     producer: string,
