@@ -7,6 +7,8 @@ const schema = buildSchema(`
     type Query {
         actor(id: String): Actor
         actors: [Actor]
+        film(id: String): Film
+        films: [Film]
     },
     type Actor {
         id: String
@@ -14,6 +16,14 @@ const schema = buildSchema(`
         height: String
         birth_year: String
         gender: String
+    },
+    type Film {
+        id: String
+        title: String
+        producer: String
+        director: String
+        opening_crawl: String
+        created: String
     }
 `);
 
@@ -23,7 +33,6 @@ const getActor = async (args: any) => {
     try {
         const response = await fetch(`https://swapi.co/api/people/${id}`);
         const json = await response.json();
-        console.log(json);
 
         return json;
 
@@ -33,23 +42,25 @@ const getActor = async (args: any) => {
 
 }
 
-interface RequestPayload {
-    results: Actor[]
-}
+const getFilm = async (args: any) => {
+    var id = args.id;
 
-interface Actor {
-    url: string,
-    name: string,
-    height: string,
-    birth_year: string,
-    gender: string
-}
+    try {
+        const response = await fetch(`https://swapi.co/api/films/${id}`);
+        const json = await response.json() as Film;
 
+        return json;
+
+    } catch (error) {
+        console.log(error);
+    }
+
+}
 
 const getActors = async () => {
     try {
         const response = await fetch('https://swapi.co/api/people');
-        const json = await response.json() as RequestPayload;
+        const json = await response.json() as ActorsRequestPayload;
 
         return json.results.map(actor =>
             ({
@@ -66,9 +77,32 @@ const getActors = async () => {
     }
 }
 
+const getFilms = async () => {
+    try {
+        const response = await fetch('https://swapi.co/api/films');
+        const json = await response.json() as FilmsRequestPayload;
+
+        return json.results.map(film =>
+            ({
+                id: film.url,
+                title: film.title,
+                producer: film.producer,
+                director: film.director,
+                opening_crawl: film.opening_crawl,
+                created: film.created
+            })
+        );
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 var root = {
     actor: getActor,
-    actors: getActors
+    actors: getActors,
+    film: getFilm,
+    films: getFilms
 };
 
 export const graphqlEndpoint = () => express_graphql({

@@ -3,6 +3,7 @@ interface IFilmPayload {
 }
 
 interface IFilm {
+    id: string;
     title: string;
     producer: string;
     director: string;
