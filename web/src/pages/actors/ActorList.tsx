@@ -8,13 +8,16 @@ import styles from './ActorList.module.scss';
 const loadActors = (actors: IActor[]) => {
     return actors.map((actor: IActor) => {
         return <div key={actor.id} className={styles.actor}>
-             <Link to={'/actor/films/'}>{actor.name}</Link>
+             <Link to={`/films?actorId=${actor.id}`}>{actor.name}</Link>
+             
         </div>;
     })
 }
 
 export default class ActorList extends React.Component {
+
     render() {
+        
         return <>
             <HeaderContainer title="People"></HeaderContainer>
             <Query query={QUERY_ACTORS}>

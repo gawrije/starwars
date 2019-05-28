@@ -23,3 +23,14 @@ export const QUERY_ACTORS = gql`
     }
 `;
 
+export const QUERY_ACTOR = gql`
+    query Actor($id: String!) {
+        actor(id: $id) {
+            films {
+                id
+                title
+            }
+        }
+    }
+`;
+

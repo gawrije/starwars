@@ -33,7 +33,7 @@ const getActor = async (_: any, args: any) => {
     var id = args.id;
 
     try {
-        const response = await fetch(`https://swapi.co/api/people/${id}`);
+        const response = await fetch(`${id}`);
         const actor = await response.json() as IActor;
 
         return {
