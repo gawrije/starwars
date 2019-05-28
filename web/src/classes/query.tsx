@@ -19,24 +19,7 @@ export const QUERY_ACTORS = gql`
         actors {
             name
             id
-            films {
-                id
-            }
         }
     }
 `;
-
-export const QUERY_FILM = gql`
-    query Film {
-        film {
-            title
-            producer
-            director
-            opening_crawl
-            created
-            id
-        }        
-    }
-`;
-
 
