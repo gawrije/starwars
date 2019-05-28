@@ -41,13 +41,15 @@ export default class FilmList extends React.Component<Props> {
             this.actorId = params.actorId;
             query = QUERY_ACTOR;
             variables = { id: this.actorId };
+        }else{
+            this.actorId = null;
         }
 
         return <>
             <HeaderContainer title="Films"></HeaderContainer>
             <Query query={query} variables={variables}>
                 {({ data }: { data: any }) => <div className={styles.filmsContainer}>
-                    {this.actorId ? this.loadFilmsForActor(data) : this.loadFilms(data)}
+                    {this.actorId  ? this.loadFilmsForActor(data) : this.loadFilms(data)}
                 </div>}
             </Query>
         </>;
