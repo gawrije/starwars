@@ -18,7 +18,7 @@ import ApolloClient from "apollo-boost";
 
 const client = new ApolloClient({
   //uri: "http://localhost:9000/graphql"
-  uri: "http://ec2-34-229-215-158.compute-1.amazonaws.com:9000/graphql"
+  uri: "https://gq0d1qb562.execute-api.ap-southeast-2.amazonaws.com/latest/graphql"
 });
 
 /*
